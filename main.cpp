@@ -1,11 +1,9 @@
-#include<iostream>
-#include"mainClasses.cpp"
-int main()
-{
-    Gameboard user;
-    user.setUserName();
-    user.printUserName();
-    user.printGameSpace();
-    user.setGameSpace();
+#include "header.h"
+int main() {
+    Gameboard game1;
+    game1.setPlayerNames();
+    game1.printPlayerNames();
+    game1.printGameBoard();
+    game1.runGame();
     return 0;
 }
