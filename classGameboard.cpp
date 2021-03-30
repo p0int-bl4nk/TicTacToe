@@ -1,5 +1,5 @@
 #include "header.h"
-#define WIN 1
+#define WINNER 1
 #define NO_WINNER 0
 #define PLAYER1_MOVE 1
 #define PLAYER2_MOVE 0
@@ -26,17 +26,17 @@ void Gameboard::printPlayerNames() {
 int Gameboard::checkForWinner(char mark) {
 	int count{};
 
-//	Check if any row has 4 consecutive 'mark'.  
+//	Check if any row has 4 consecutive 'mark'.
 	for(int row{}; row < 4; row++) {
                 for(int column{}; column < 4; column++) {
                 	if(gameSpace[row][column] == mark)
                         	count++;
                 }
                 if(count == 4)
-                        return WIN;
+                        return WINNER;
                 count = 0;
-         }   
-         
+         }
+
 //       Check if any column has 4 consecutive 'mark'.
          for(int row{} ; row < 4; row++) {
                 for(int column{}; column < 4; column++) {
@@ -44,28 +44,28 @@ int Gameboard::checkForWinner(char mark) {
                         	count++;
                 }
                 if(count == 4)
-                	return WIN;
+                	return WINNER;
                 count = 0;
-         }      
-         
+         }
+
 //       Check if diagonal (00,11,22,33) has 4 consecutive 'mark'.
-         for(int column{}; column < 4; column++) {		 
+         for(int column{}; column < 4; column++) {
                	if(gameSpace[column][column] == mark)
         	        count++;
          }
          if(count == 4)
-               	return WIN;
+               	return WINNER;
          count = 0;
-               	
+
 //       Check if diagonal (03,12,21,30) has 4 consecutive 'mark'.
-	 for(int row{}, column{3}; row < 4; row++,column--) {	
+	 for(int row{}, column{3}; row < 4; row++,column--) {
                 if(gameSpace[row][column] == mark)
                 	count++;
 	 }
 	 if(count == 4)
-               	return WIN;
-               	
-         return NO_WINNER;	
+               	return WINNER;
+
+         return NO_WINNER;
 }
 
 void Gameboard::runGame() {
@@ -77,23 +77,23 @@ void Gameboard::runGame() {
         std::cout << " column(1-4): ";
         std::cin >> column;
         column--;
-        
+
         if(gameSpace[row][column] != 'x' && gameSpace[row][column] != 'o') {
             if(move % 2 == PLAYER1_MOVE) {
                 gameSpace[row][column] = 'x';
                 printGameBoard();
-                if(checkForWinner('x') == WIN) {
+                if(checkForWinner('x') == WINNER) {
                 	std::cout << player1 << " wins the game!";
-                        exit(WIN);
+                        exit(WINNER);
                 }
                 std::cout << "Player 2 "<< player2 << " ('o'),";
             }
             else if(move % 2 == PLAYER2_MOVE) {
                 gameSpace[row][column] = 'o';
                 printGameBoard();
-                if(checkForWinner('o') == WIN) {
+                if(checkForWinner('o') == WINNER) {
                 	std::cout << player2 << " wins the game!";
-                        exit(WIN);
+                        exit(WINNER);
                 }
                 std::cout << "Player 1 "<< player1 << " ('x'),";
             }
@@ -102,7 +102,7 @@ void Gameboard::runGame() {
         	std::cout << "Invalid position!\nTry again.\n";
             	move--;
         }
-        
+
         if(move == 15){
         	std::cout << "Match is Tied!" << '\n';
         	exit(NO_WINNER);
