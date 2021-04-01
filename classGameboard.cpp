@@ -78,9 +78,9 @@ void Gameboard::runGame() {
         std::cin >> column;
         column--;
 
-        if(gameSpace[row][column] != 'x' && gameSpace[row][column] != 'o') {
+        if(gameSpace[row][column] == '-') {
             if(move % 2 == PLAYER1_MOVE) {
-                gameSpace[row][column] = 'x';
+                gameSpace[row][column] = 'X';
                 printGameBoard();
                 if(checkForWinner('x') == WINNER) {
                 	std::cout << player1 << " wins the game!";
@@ -89,7 +89,7 @@ void Gameboard::runGame() {
                 std::cout << "Player 2 "<< player2 << " ('o'),";
             }
             else if(move % 2 == PLAYER2_MOVE) {
-                gameSpace[row][column] = 'o';
+                gameSpace[row][column] = 'O';
                 printGameBoard();
                 if(checkForWinner('o') == WINNER) {
                 	std::cout << player2 << " wins the game!";
