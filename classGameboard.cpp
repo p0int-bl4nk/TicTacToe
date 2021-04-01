@@ -11,16 +11,16 @@ Gameboard::Gameboard() {
 }
 
 void Gameboard::setPlayerNames() {
-    std::cout<<"Player1 name('x'): ";
+    std::cout<<"Player1 name: ";
     getline(cin,player1);
     std::cout<<"\n";
-    std::cout<<"Player2 name('o'): ";
+    std::cout<<"Player2 name: ";
     getline(cin,player2);
 }
 
 void Gameboard::printPlayerNames() {
-    cout<<"\n\nPlayer 1 ('x'): "<<player1;
-    cout<<"\nPlayer 2 ('o'): "<<player2<<"\n\n";
+    cout<< "\n\n" <<player1 << " is 'X'.\n";
+    cout<< player2 << " is 'O'.\n\n";
 }
 
 int Gameboard::checkForWinner(char mark) {
@@ -58,18 +58,18 @@ int Gameboard::checkForWinner(char mark) {
          count = 0;
 
 //       Check if diagonal (03,12,21,30) has 4 consecutive 'mark'.
-	 for(int row{}, column{3}; row < 4; row++,column--) {
+	       for(int row{}, column{3}; row < 4; row++,column--) {
                 if(gameSpace[row][column] == mark)
                 	count++;
-	 }
-	 if(count == 4)
+	       }
+	       if(count == 4)
                	return WINNER;
 
          return NO_WINNER;
 }
 
 void Gameboard::runGame() {
-    std::cout<< "\nFirst turn " << player1 << " ('x')\n";
+    std::cout<< "\nFirst turn: " << player1 << " ('X')\n";
     for(int move{1}; move <= 16; move++) {
         std::cout << "\nPick your position, row(1-4): ";
         std::cin >> row;
@@ -81,21 +81,23 @@ void Gameboard::runGame() {
         if(gameSpace[row][column] == '-') {
             if(move % 2 == PLAYER1_MOVE) {
                 gameSpace[row][column] = 'X';
+                system("clear");
                 printGameBoard();
-                if(checkForWinner('x') == WINNER) {
+                if(checkForWinner('X') == WINNER) {
                 	std::cout << player1 << " wins the game!";
                         exit(WINNER);
                 }
-                std::cout << "Player 2 "<< player2 << " ('o'),";
+                std::cout << player2 << " ('O'),";
             }
             else if(move % 2 == PLAYER2_MOVE) {
                 gameSpace[row][column] = 'O';
+                system("clear");
                 printGameBoard();
-                if(checkForWinner('o') == WINNER) {
+                if(checkForWinner('O') == WINNER) {
                 	std::cout << player2 << " wins the game!";
                         exit(WINNER);
                 }
-                std::cout << "Player 1 "<< player1 << " ('x'),";
+                std::cout << player1 << " ('X'),";
             }
         }
         else {
